@@ -19,13 +19,21 @@ public class Task {
 		return id;
 	}
 
-	public String gerTitle() {
+	public String getTitle() {
 		return title;
 	}
 
-	public LocalDate gerDueDate() {
+	public void setTitle(String title) {
+		this.title = title;
+	};
+
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
+
+	public void setDueDate(LocalDate dueDate) {
+		this.dueDate = dueDate;
+	};
 
 	public boolean isDone() {
 		return isDone;
@@ -42,7 +50,7 @@ public class Task {
 	@Override
 	public String toString() {
 		String status = isDone ? "✓" : (isOverdue() ? "期限切れ" : "未完了");
-		return String.format("[%d]%s(期限:%s)%s", id, title, dueDate, status);
+		return String.format("[%d] %s (期限:%s) %s", id, title, dueDate, status);
 	}
 
 }
