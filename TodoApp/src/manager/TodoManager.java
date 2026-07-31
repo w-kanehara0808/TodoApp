@@ -19,12 +19,9 @@ public class TodoManager {
 		if (tasks.isEmpty()) {
 			System.out.println("タスクはありません");
 		} else {
-			for (Task t : tasks) {
-				//未完了のみ表示
-				if (!t.isDone()) {
-					System.out.println(t);
-				}
-			}
+			tasks.stream()
+					.filter(t -> !t.isDone())
+					.forEach(System.out::println);
 		}
 	}
 
@@ -44,11 +41,9 @@ public class TodoManager {
 	}
 
 	public void complete(int id) {
-		for (Task t : tasks) {
-			if (t.getId() == id) {
-				t.setDone(true);
-			}
-		}
+		tasks.stream()
+				.filter(t -> t.getId() == id)
+				.forEachOrdered(t -> t.setDone(true));
 	}
 
 	public void delete(int id) {
@@ -56,12 +51,9 @@ public class TodoManager {
 	}
 
 	public void showCompelete() {
-		for (Task t : tasks) {
-			if (t.isDone()) {
-				System.out.println(t);
-			}
+		tasks.stream()
+				.filter(t -> t.isDone())
+				.forEach(System.out::println);
 
-		}
 	}
-
 }
