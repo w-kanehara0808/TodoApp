@@ -1,5 +1,6 @@
 package main;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,9 +10,10 @@ import manager.TodoManager;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// 1.TodoManagerのインスタンスを作成する
 		TodoManager manager = new TodoManager();
+		manager.loadFromCsv("tasks.csv");
 
 		//2.Scannerを作る
 		Scanner scanner = new Scanner(System.in);
@@ -36,6 +38,7 @@ public class Main {
 			int choice = scanner.nextInt();
 			scanner.nextLine();
 			if (choice == 0) {
+				manager.saveToCsv("tasks.csv");
 				break;
 			}
 			//6.switchで処理を分岐する
@@ -80,18 +83,18 @@ public class Main {
 
 				LocalDate dueDate = null;
 				boolean valid = false;
-				
-				while(!valid) {
+
+				while (!valid) {
 					try {
 						System.out.println("新しい期限を入力してください(変更しない場合はEnter) >");
 						String input = scanner.nextLine();
-						if(input.isEmpty()) {
+						if (input.isEmpty()) {
 							valid = true;
-						}else {
+						} else {
 							dueDate = LocalDate.parse(input, formatter);
 							valid = true;
 						}
-					}catch(DateTimeParseException e) {
+					} catch (DateTimeParseException e) {
 						System.out.println("正しく入力してください");
 					}
 				}
