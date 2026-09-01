@@ -95,4 +95,17 @@ public class TodoManager {
 		}
 
 	}
+
+	public int getTaskCount() {
+		return tasks.size();
+	}
+
+	public Task getTask(int id) {
+		for (Task t : tasks) {
+			if (t.getId() == id) {
+				return t;
+			}
+		}
+		return null;
+	}
 }
